@@ -14,7 +14,7 @@ pipeline {
         	steps {
         		script {
         			try {
-        				bat ("newman run "Newman.postman_collection.json" --environment "Test 001.postman_environment.json" --disable-unicode")
+        				bat (newman run "Newman.postman_collection.json" --environment "Test 001.postman_environment.json" --disable-unicode)
         				echo 'Ejecucion de pruebas sin errores...'
         			}
         			catch (ex) {
