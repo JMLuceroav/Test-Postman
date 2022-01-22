@@ -6,19 +6,19 @@ pipeline {
     
         stage ('Build') {
             steps {
-                bat ("newman -version")
+                bat ("newman --version")
             }
         }
         
-        stage ('Ejecutar Pruebas') {
+        stage ('Run API Tests') {
         	steps {
         		script {
         			try {
-        				bat (newman run "Newman.postman_collection.json" --environment "Test 001.postman_environment.json" --disable-unicode)
-        				echo 'Ejecucion de pruebas sin errores...'
+        				bat (newman run "Newman.postman_collection.json" --environment "Test 001.postman_environment.json" --disable-unicode --reporters cli,junit,htmlextra --reporter-junit-export "newman/report.xml" --reporter-htmlextra-export "newman/report.html")
+        				echo 'Ejecucion de pruebas sin errores'
         			}
         			catch (ex) {
-        				echo 'Finalizo ejecucion con fallos...'
+        				echo 'Finalizo ejecucion con fallos'
         				error ('Failed')
                     }
                 }
@@ -29,7 +29,7 @@ pipeline {
         	steps {
         		script {
                      try {
-                    	publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "${WORKSPACE}/target/site/serenity", reportFiles: 'index.html', reportName: 'Evidencias de Prueba', reportTitles: 'Reporte de Pruebas'])                    	
+                    	publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "${WORKSPACE}/newman", reportFiles: 'report.html', reportName: 'Evidencias de Prueba', reportTitles: 'Reporte de Pruebas'])                    	
                         echo 'Reporte realizado con exito'
                     }
 
