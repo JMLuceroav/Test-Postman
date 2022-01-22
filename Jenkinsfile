@@ -1,12 +1,9 @@
 pipeline {
 
-    agent any
-    
     stages {
-    
         stage ('Build') {
             steps {
-                bat ("newman --version")
+                bat 'newman --version'
             }
         }
         
@@ -14,7 +11,7 @@ pipeline {
         	steps {
         		script {
         			try {
-        				bat (newman run "Newman.postman_collection.json" --environment "Test 001.postman_environment.json" --disable-unicode --reporters cli,junit,htmlextra --reporter-junit-export "newman/report.xml" --reporter-htmlextra-export "newman/report.html")
+        				bat 'newman run "Newman.postman_collection.json" --environment "Test 001.postman_environment.json" --disable-unicode --reporters cli,junit,htmlextra --reporter-junit-export "newman/report.xml" --reporter-htmlextra-export "newman/report.html'
         				echo 'Ejecucion de pruebas sin errores'
         			}
         			catch (ex) {
