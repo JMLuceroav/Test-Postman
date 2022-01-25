@@ -6,6 +6,8 @@ pipeline {
         stage ('Build') {
             steps {
                 bat 'newman --version'
+                bat 'npm --version'
+                bat 'npm install newman-reporter-htmlextra'
             }
         }
         
@@ -29,7 +31,7 @@ pipeline {
         		script {
                      try {
                     	publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "${WORKSPACE}/newman", reportFiles: 'report.html', reportName: 'Evidencias de Prueba', reportTitles: 'Reporte de Pruebas'])                    	
-                        echo 'Reporte realizado con exito'
+                         echo 'Reporte realizado con exito'
                     }
 
                     catch (ex) {
