@@ -7,7 +7,8 @@ pipeline {
             steps {
                 bat 'newman --version'
                 bat 'npm --version'
-                bat 'npm install newman-reporter-htmlextra'
+                bat 'node --version'
+                bat 'npm install -g newman-reporter-htmlextra'
             }
         }
         
