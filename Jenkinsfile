@@ -29,6 +29,7 @@ pipeline {
         			}
         			catch (ex) {
         				echo 'Finalizo ejecucion con fallos'
+                         publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "${WORKSPACE}/newman", reportFiles: 'index.html', reportName: 'Evidencias de Prueba', reportTitles: 'Reporte de Pruebas'])
         				error ('Failed')
                     }
                 }
@@ -41,7 +42,7 @@ pipeline {
                      try {
                          echo "${defTimestamp}"
                           echo "Generando reporte"
-                    	publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: "${WORKSPACE}/newman", reportFiles: 'index.html', reportName: 'Evidencias de Prueba', reportTitles: 'Reporte de Pruebas'])                    	
+                    	publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "${WORKSPACE}/newman", reportFiles: 'index.html', reportName: 'Evidencias de Prueba', reportTitles: 'Reporte de Pruebas'])                    	
                          echo 'Reporte realizado con exito'
                     }
 
