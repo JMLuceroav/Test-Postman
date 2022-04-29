@@ -39,7 +39,7 @@ pipeline {
         	steps {
         		script {
                      try {
-                         bat ("echo ${defTimestamp}") 
+                         echo "${defTimestamp}"
                     	publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "${WORKSPACE}/newman", reportFiles: 'report.html', reportName: 'Evidencias de Prueba', reportTitles: 'Reporte de Pruebas'])                    	
                          echo 'Reporte realizado con exito'
                     }
