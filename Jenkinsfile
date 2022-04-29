@@ -19,20 +19,18 @@ pipeline {
             }
         }
         
-        stage ('API Test') {
+        stage ('Postman Test') {
         	steps {
         		script {    
-                         echo 'Ejecucion newman'
-        				bat   'newman run "Newman.postman_collection.json" --environment "Test 001.postman_environment.json" --disable-unicode --reporters cli,junit,htmlextra --reporter-junit-export "newman/index.xml" --reporter-htmlextra-export "newman/index.html"' 			
+                         echo 'Ejecucion y generación de reporte'
+        				bat 'newman run "Newman.postman_collection.json" --environment "Test 001.postman_environment.json" --disable-unicode --reporters cli,junit,htmlextra --reporter-junit-export "newman/index.xml" --reporter-htmlextra-export "newman/index.html"' 			
                 }
             }
-        }
-        
-        stage ('Reporte') {
-        	steps {
-        		script {
-                         echo "${defTimestamp}"
-                          echo "Generando reporte"
+             
+            post {
+                always {
+                    echo "${defTimestamp}"
+                         echo "Generando reporte"
                     	publishHTML([
                               allowMissing: true,
                               alwaysLinkToLastBuild: true, 
@@ -40,9 +38,9 @@ pipeline {
                               reportFiles: 'index.html',
                               reportName: 'Evidencias de Prueba',
                               reportTitles: 'Reporte de Pruebas'
-                         ])                    	
+                         ])   
                 }
-            }
-        }
+            }   
+        } 
     }
 }
