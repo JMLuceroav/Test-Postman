@@ -21,17 +21,9 @@ pipeline {
         
         stage ('API Test') {
         	steps {
-        		script {
-        			try {
-                         echo 'Testing'
-        				bat   'newman run "Newman.postman_collection.json" --environment "Test 001.postman_environment.json" --disable-unicode --reporters cli,junit,htmlextra --reporter-junit-export "newman/index.xml" --reporter-htmlextra-export "newman/index.html"'
-        				echo 'Ejecucion de pruebas sin errores'
-        			}
-        			catch (ex) {
-        				echo 'Finalizo ejecucion con fallos'
-                         publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "${WORKSPACE}/newman", reportFiles: 'index.html', reportName: 'Evidencias de Prueba', reportTitles: 'Reporte de Pruebas'])
-        				error ('Failed')
-                    }
+        		script {    
+                         echo 'Ejecucion newman'
+        				bat   'newman run "Newman.postman_collection.json" --environment "Test 001.postman_environment.json" --disable-unicode --reporters cli,junit,htmlextra --reporter-junit-export "newman/index.xml" --reporter-htmlextra-export "newman/index.html"' 			
                 }
             }
         }
@@ -39,17 +31,17 @@ pipeline {
         stage ('Reporte') {
         	steps {
         		script {
-                     try {
                          echo "${defTimestamp}"
                           echo "Generando reporte"
-                    	publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "${WORKSPACE}/newman", reportFiles: 'index.html', reportName: 'Evidencias de Prueba', reportTitles: 'Reporte de Pruebas'])                    	
-                         echo 'Reporte realizado con exito'
-                    }
-
-                    catch (ex) {
-                        echo 'Reporte realizado con Fallos'
-                        error ('Failed')
-                    }
+                    	publishHTML([
+                              allowMissing: true,
+                              alwaysLinkToLastBuild: true,
+                              keepAll: true,
+                              reportDir: "${WORKSPACE}/newman"
+                              reportFiles: 'index.html',
+                              reportName: 'Evidencias de Prueba',
+                              reportTitles: 'Reporte de Pruebas'
+                         ])                    	
                 }
             }
         }
