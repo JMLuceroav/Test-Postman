@@ -24,7 +24,7 @@ pipeline {
         		script {
         			try {
                          echo 'Testing'
-        				bat 'newman run "Newman.postman_collection.json" --environment "Test 001.postman_environment.json" --disable-unicode --reporters cli,junit,htmlextra --reporter-junit-export "newman/report.xml" --reporter-htmlextra-export "newman/report.html'
+        				bat   'newman run "Newman.postman_collection.json" --environment "Test 001.postman_environment.json" --disable-unicode --reporters cli,junit,htmlextra --reporter-junit-export "newman/report.xml" --reporter-htmlextra-export "newman/report.html"'
         				echo 'Ejecucion de pruebas sin errores'
         			}
         			catch (ex) {
@@ -40,6 +40,7 @@ pipeline {
         		script {
                      try {
                          echo "${defTimestamp}"
+                          echo "${WORKSPACE}"
                     	publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "${WORKSPACE}/newman", reportFiles: 'report.html', reportName: 'Evidencias de Prueba', reportTitles: 'Reporte de Pruebas'])                    	
                          echo 'Reporte realizado con exito'
                     }
