@@ -35,9 +35,8 @@ pipeline {
                           echo "Generando reporte"
                     	publishHTML([
                               allowMissing: true,
-                              alwaysLinkToLastBuild: true,
-                              keepAll: true,
-                              reportDir: "${WORKSPACE}/newman"
+                              alwaysLinkToLastBuild: true, 
+                              keepAll: true, reportDir: "${WORKSPACE}/newman",
                               reportFiles: 'index.html',
                               reportName: 'Evidencias de Prueba',
                               reportTitles: 'Reporte de Pruebas'
