@@ -1,3 +1,9 @@
+import java.text.SimpleDateFormat
+
+def defDateFormat = new SimpleDateFormat("yyyyMMddHHmm")
+def defDate = new Date()
+def defTimestamp = defDateFormat.format(defDate).toString()
+
 pipeline {
      
     agent any
@@ -5,6 +11,7 @@ pipeline {
     stages {
         stage ('Build') {
             steps {
+                echo 'Building'
                 bat 'newman --version'
                 bat 'npm --version'
                 bat 'node --version'
@@ -12,10 +19,11 @@ pipeline {
             }
         }
         
-        stage ('Run API Tests') {
+        stage ('API Test') {
         	steps {
         		script {
         			try {
+                         echo 'Testing'
         				bat 'newman run "Newman.postman_collection.json" --environment "Test 001.postman_environment.json" --disable-unicode --reporters cli,junit,htmlextra --reporter-junit-export "newman/report.xml" --reporter-htmlextra-export "newman/report.html'
         				echo 'Ejecucion de pruebas sin errores'
         			}
@@ -31,6 +39,7 @@ pipeline {
         	steps {
         		script {
                      try {
+                         bat ("echo ${defTimestamp}") 
                     	publishHTML([allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "${WORKSPACE}/newman", reportFiles: 'report.html', reportName: 'Evidencias de Prueba', reportTitles: 'Reporte de Pruebas'])                    	
                          echo 'Reporte realizado con exito'
                     }
