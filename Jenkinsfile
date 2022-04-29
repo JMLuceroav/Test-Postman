@@ -22,14 +22,20 @@ pipeline {
         stage ('Postman Test') {
         	steps {
         		script {    
-                         echo 'Ejecucion y generación de reporte'
+                         echo 'Ejecucion de pruebas'
         				bat 'newman run "Newman.postman_collection.json" --environment "Test 001.postman_environment.json" --disable-unicode --reporters cli,junit,htmlextra --reporter-junit-export "newman/index.xml" --reporter-htmlextra-export "newman/index.html"' 			
                 }
-            }
-             
-            post {
+            }  
+        } 
+         
+         
+         post {
                 always {
-                    echo "${defTimestamp}"
+                     
+        stage ('Reporte') {
+        	steps {
+        		script {
+                         echo "${defTimestamp}"
                          echo "Generando reporte"
                     	publishHTML([
                               allowMissing: true,
@@ -38,9 +44,10 @@ pipeline {
                               reportFiles: 'index.html',
                               reportName: 'Evidencias de Prueba',
                               reportTitles: 'Reporte de Pruebas'
-                         ])   
+                         ])  }}} 
                 }
             }   
-        } 
+         
+         
     }
 }
