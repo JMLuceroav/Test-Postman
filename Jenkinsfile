@@ -24,7 +24,7 @@ pipeline {
         		script {
         			try {
                          echo 'Testing'
-        				bat 'newman run "Newman.postman_collection.json" --environment "Test 001.postman_environment.json" --disable-unicode --reporters cli,junit,htmlextra --reporter-junit-export "newman/report.xml" --reporter-htmlextra-export "newman/report.html'
+        				bat 'newman run "Newman.postman_collection.json" --environment "Test 001.postman_environment.json" --disable-unicode --reporters cli,junit,htmlextra --reporter-junit-export "${WORKSPACE}/newman/report.xml" --reporter-htmlextra-export "${WORKSPACE}/newman/report.html'
         				echo 'Ejecucion de pruebas sin errores'
         			}
         			catch (ex) {
