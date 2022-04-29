@@ -28,13 +28,13 @@ pipeline {
             }  
         } 
          
-         
+     stage ('Reporte') {
+        	steps {
+        		script {    
          post {
                 always {
                      
-        stage ('Reporte') {
-        	steps {
-        		script {
+        
                          echo "${defTimestamp}"
                          echo "Generando reporte"
                     	publishHTML([
