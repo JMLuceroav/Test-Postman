@@ -35,6 +35,7 @@ pipeline {
                 always {                  
                          echo "Generando reporte"
                          echo "${defTimestamp}"
+                         echo "Send notifications for result: ${currentBuild.result}"
                     	publishHTML([
                               allowMissing: true,
                               alwaysLinkToLastBuild: true, 
