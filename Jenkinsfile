@@ -4,6 +4,10 @@ def defDateFormat = new SimpleDateFormat("yyyyMMddHHmm")
 def defDate = new Date()
 def defTimestamp = defDateFormat.format(defDate).toString()
 
+def collection = "Newman.postman_collection.json"
+de env = "Test 001.postman_environment.json"
+
+
 pipeline {
      
     agent any
@@ -23,18 +27,12 @@ pipeline {
         	steps {
         		script {    
                          echo 'Ejecucion de pruebas'
-        				bat 'newman run "Newman.postman_collection.json" --environment "Test 001.postman_environment.json" --disable-unicode --reporters cli,junit,htmlextra --reporter-junit-export "newman/index.xml" --reporter-htmlextra-export "newman/index.html"' 			
+                    bat 'newman run ${collection} --environment ${env} --disable-unicode --reporters cli,junit,htmlextra --reporter-junit-export "newman/index.xml" --reporter-htmlextra-export "newman/index.html"' 			
                 }
-            }  
-        } 
-         
-     stage ('Reporte') {
-        	steps {
-        		script {    
-         post {
+            }
+             
+            post {
                 always {
-                     
-        
                          echo "${defTimestamp}"
                          echo "Generando reporte"
                     	publishHTML([
@@ -44,10 +42,9 @@ pipeline {
                               reportFiles: 'index.html',
                               reportName: 'Evidencias de Prueba',
                               reportTitles: 'Reporte de Pruebas'
-                         ])  }}} 
+                         ])   
                 }
             }   
-         
-         
+        } 
     }
 }
