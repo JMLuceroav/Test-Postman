@@ -5,7 +5,6 @@ def defDate = new Date()
 def defTimestamp = defDateFormat.format(defDate).toString()
 
 def collection = "Newman.postman_collection.json"
-def environment = "Test 001.postman_environment.json"
 
 
 pipeline {
@@ -27,7 +26,7 @@ pipeline {
         	steps {
         		script {    
                          echo 'Ejecucion de pruebas'
-                    bat 'newman run ${collection} --environment ${environment} --disable-unicode --reporters cli,junit,htmlextra --reporter-junit-export "newman/index.xml" --reporter-htmlextra-export "newman/index.html"' 			
+                    bat 'newman run ${collection} --environment "Test 001.postman_environment.json" --disable-unicode --reporters cli,junit,htmlextra --reporter-junit-export "newman/index.xml" --reporter-htmlextra-export "newman/index.html"' 			
                 }
             }
              
