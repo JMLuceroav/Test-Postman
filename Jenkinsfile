@@ -45,6 +45,10 @@ pipeline {
                               reportTitles: 'Reporte de Pruebas'
                          ])   
                 }
+                 
+                failure {
+                         mail to: jluceroav@gmail.com, subject: 'The Pipeline failed :('
+               }
             }   
         } 
     }
