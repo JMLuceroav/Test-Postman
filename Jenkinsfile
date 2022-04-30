@@ -22,11 +22,11 @@ pipeline {
         	steps {
         		script {    
                          echo 'Ejecucion de pruebas'
-                         bat 'newman run "Newman.postman_collection.json" 
-                              --environment "Test 001.postman_environment.json" 
-                              --disable-unicode 
-                              --reporters cli,junit,htmlextra 
-                              --reporter-junit-export "newman/index.xml" 
+                         bat 'newman run "Newman.postman_collection.json" \
+                              --environment "Test 001.postman_environment.json" \
+                              --disable-unicode \
+                              --reporters cli,junit,htmlextra \
+                              --reporter-junit-export "newman/index.xml" \
                               --reporter-htmlextra-export "newman/index.html"' 			
                 }
             }
