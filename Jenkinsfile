@@ -5,7 +5,7 @@ def defDate = new Date()
 def defTimestamp = defDateFormat.format(defDate).toString()
 
 def collection = "Newman.postman_collection.json"
-de env = "Test 001.postman_environment.json"
+def env = "Test 001.postman_environment.json"
 
 
 pipeline {
