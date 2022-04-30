@@ -3,8 +3,7 @@ import java.text.SimpleDateFormat
 def defDateFormat = new SimpleDateFormat("yyyyMMddHHmm")
 def defDate = new Date()
 def defTimestamp = defDateFormat.format(defDate).toString()
-def pathXml = "newman/index.xml"
-def pathHtml = "newman/index.html"
+
 pipeline {
      
     agent any
@@ -23,14 +22,14 @@ pipeline {
         	steps {
         		script {    
                          echo 'Ejecucion de pruebas'
-                         bat 'newman run "Newman.postman_collection.json" --environment "Test 001.postman_environment.json" --disable-unicode --reporters cli,junit,htmlextra --reporter-junit-export "${pathXml}" --reporter-htmlextra-export "${pathHtml}"' 			
+                         bat 'newman run "Newman.postman_collection.json" --environment "Test 001.postman_environment.json" --disable-unicode --reporters cli,junit,htmlextra --reporter-junit-export "newman/index.xml" --reporter-htmlextra-export "newman/index.html"' 			
                 }
             }
              
             post {
-                always {
-                         echo "${defTimestamp}"
+                always {                  
                          echo "Generando reporte"
+                         echo "${defTimestamp}"
                     	publishHTML([
                               allowMissing: true,
                               alwaysLinkToLastBuild: true, 
