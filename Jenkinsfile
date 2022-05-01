@@ -35,7 +35,6 @@ pipeline {
                 always {                  
                          echo "Generando reporte"
                          echo "${defTimestamp}"
-                         echo "Send notifications for result: ${currentBuild.result}"
                     	publishHTML([
                               allowMissing: true,
                               alwaysLinkToLastBuild: true, 
@@ -47,6 +46,7 @@ pipeline {
                 }
                  
                 failure {
+                         echo 'I failed :('
                          echo "Project: ${env.JOB_NAME}" 
                          echo "Build Number: ${env.BUILD_NUMBER}"
                          echo "URL de build: ${env.BUILD_URL}"
