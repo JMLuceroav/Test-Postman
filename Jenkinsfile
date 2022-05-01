@@ -55,7 +55,7 @@ pipeline {
                          echo "Send notifications for result: ${currentBuild.result}"
                          echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
                      
-                         email to: "${correo}",
+                         mail to: "${correo}",
                          subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
                          body: "Your bulid completed, please check: ${env.BUILD_URL}"
                }
