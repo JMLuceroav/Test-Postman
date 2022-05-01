@@ -51,6 +51,12 @@ pipeline {
                          echo "Build Number: ${env.BUILD_NUMBER}"
                          echo "URL de build: ${env.BUILD_URL}"
                          echo "Project name: ${env.JOB_NAME}"
+                         echo "Send notifications for result: ${currentBuild.result}"
+               }
+                 
+               success {
+                         echo 'I succeeded!'
+                         echo "Send notifications for result: ${currentBuild.result}"
                }
             }   
         } 
