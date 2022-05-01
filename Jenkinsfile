@@ -57,7 +57,7 @@ pipeline {
                      
                          email to: "${correo}",
                          subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
-                         body: "Your bulid completed, please check: ${env.BUILD_URL}",
+                         body: "Your bulid completed, please check: ${env.BUILD_URL}"
                }
                  
                success {
