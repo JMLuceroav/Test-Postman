@@ -3,6 +3,7 @@ import java.text.SimpleDateFormat
 def defDateFormat = new SimpleDateFormat("yyyyMMddHHmm")
 def defDate = new Date()
 def defTimestamp = defDateFormat.format(defDate).toString()
+def correo = 'jluceroav@gmail.com'
 
 pipeline {
      
@@ -52,9 +53,12 @@ pipeline {
                          echo "URL de build: ${env.BUILD_URL}"
                          echo "Project name: ${env.JOB_NAME}"
                          echo "Send notifications for result: ${currentBuild.result}"
-                         mail to: 'jluceroav@gmail.com',
+                         echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+                     
+                         mail to: "${correo}",
                          subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
-                         body: "Something is wrong with ${env.BUILD_URL}"
+                         attachLog: true,
+                         body: "Your bulid completed, please check: ${env.BUILD_URL}"
                }
                  
                success {
