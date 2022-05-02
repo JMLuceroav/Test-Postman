@@ -51,7 +51,9 @@ def correo = 'jluceroav@gmail.com'
                 failure {
                          echo 'I failed :('
                          echo "Send notifications for result: ${currentBuild.result}"                       
-                         mail to: "${correo}",                     
+                         //mail to: "${correo}",
+                         emailext attachmentsPattern: '${WORKSPACE}/newman/index.xml',
+                         to: "${correo}",
                          subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
                          body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}"
                }
