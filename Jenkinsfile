@@ -51,7 +51,6 @@ def correo = 'jluceroav@gmail.com'
                        }  
                       catch (ex) {
                         echo 'Reporte realizado con Fallos'
-                        error ('Failed')
                     }
                 }   
                          
