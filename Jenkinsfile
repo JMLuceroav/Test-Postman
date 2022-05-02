@@ -42,7 +42,8 @@ def correo = 'jluceroav@gmail.com'
                               reportFiles: 'index.html',
                               reportName: 'Evidencias de Prueba',
                               reportTitles: 'Reporte de Pruebas'
-                         ])   
+                         ])
+                        junit allowEmptyResults: true, testResults: "${WORKSPACE}/newman/index.xml"
                     }
                     
                post {
