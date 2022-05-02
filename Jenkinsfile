@@ -56,24 +56,15 @@ def correo = 'jluceroav@gmail.com'
                          
                     }
                     
-               post {
-                    
-                failure {
-                         echo 'I failed :('
-                         echo "Send notifications for result: ${currentBuild.result}"                       
-                         mail to: "${correo}",
-                         subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
-                         body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}"
-               }
-                 
-               success {
-                         echo 'I succeeded!'
+               post {                
+                       always {                  
+                         echo "Enviar correo"
                          echo "Send notifications for result: ${currentBuild.result}"                  
                          mail to: "${correo}",
-                         subject: "Success Pipeline: ${currentBuild.fullDisplayName}",
-                         body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}"
-               }
-            }       
-                }                           
+                         subject: "${currentBuild.result} Pipeline: ${currentBuild.fullDisplayName}",
+                         body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}"                   	
+                        }
+               }       
+             }                           
          }
    }
