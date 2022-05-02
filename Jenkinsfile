@@ -50,9 +50,9 @@ def correo = 'jluceroav@gmail.com'
                     
                 failure {
                          echo 'I failed :('
-                         echo "Send notifications for result: ${currentBuild.result}"                 
-                         mail to: "${correo}",
-                         attachmentsPattern: "${WORKSPACE}/newman/index.html",
+                         echo "Send notifications for result: ${currentBuild.result}"
+                         Emailext attachmentsPattern: "${WORKSPACE}/newman/index.html",
+                         mail to: "${correo}",                         
                          subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
                          body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}"
                }
