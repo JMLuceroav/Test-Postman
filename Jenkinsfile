@@ -54,6 +54,8 @@ pipeline {
                          echo "Project name: ${env.JOB_NAME}"
                          echo "Send notifications for result: ${currentBuild.result}"
                          echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+                         echo "Descripcion del proyecto: ${env.JOB_DESCRIPTION}"
+                         echo "Cambios de compilacion: ${env.CHANGES}"
                      
                          mail to: "${correo}",
                          subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
