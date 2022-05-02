@@ -41,9 +41,8 @@ currentBuild.displayName="API-Automation-#"+currentBuild.number
                               reportTitles: 'Reporte de Pruebas'
                          ])   
                     }
-                }
-                
-              post {
+                    
+               post {
                     
                 failure {
                          echo 'I failed :('
@@ -60,6 +59,7 @@ currentBuild.displayName="API-Automation-#"+currentBuild.number
                          subject: "Success Pipeline: ${currentBuild.fullDisplayName}",
                          body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}"
                }
-            }                                 
+            }       
+                }                           
          }
    }
