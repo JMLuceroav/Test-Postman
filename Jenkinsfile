@@ -1,4 +1,7 @@
 currentBuild.displayName="API-Automation-#"+currentBuild.number
+
+def correo = 'jluceroav@gmail.com'
+
     pipeline{
               agent any
             
@@ -31,7 +34,7 @@ currentBuild.displayName="API-Automation-#"+currentBuild.number
                     }
                 }
                 stage("Generating Report"){
-                    steps{
+                    steps{   
                         publishHTML([
                               allowMissing: true,
                               alwaysLinkToLastBuild: true, 
