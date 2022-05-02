@@ -14,7 +14,7 @@ def correo = 'jluceroav@gmail.com'
                     }
                 }
 
-                stage('Postman Test'){
+                stage('Postman API Test'){
                     steps{
                         script{
                             try{
@@ -43,7 +43,7 @@ def correo = 'jluceroav@gmail.com'
                               reportName: 'Evidencias de Prueba',
                               reportTitles: 'Reporte de Pruebas'
                          ])
-                        junit allowEmptyResults: true, testResults: "${WORKSPACE}/newman/index.xml"
+                        junit allowEmptyResults: true, skipPublishingChecks: true, testResults: "${WORKSPACE}/newman/index.xml"
                     }
                     
                post {
