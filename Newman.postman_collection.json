@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d813dcac-ad5c-4c08-8c06-da570d2f7eb1",
+		"_postman_id": "b775091e-3efb-42ff-a042-bdb708aa527d",
 		"name": "Newman",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -75,7 +75,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(201);\r",
+							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -135,7 +135,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Response time is less than 200ms\", function () {\r",
-							"    pm.expect(pm.response.responseTime).to.be.below(150);\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(250);\r",
 							"});"
 						],
 						"type": "text/javascript"
