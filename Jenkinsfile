@@ -1,11 +1,10 @@
-currentBuild.displayName="Prod-API-AUtomation-#"+currentBuild.number
+currentBuild.displayName="API-Automation-#"+currentBuild.number
     pipeline{
               agent any
             
             stages{
                 stage('Build'){
                     steps{
-                         echo 'Building'
                 		 bat 'newman --version'
                 		 bat 'npm --version'
                 		 bat 'node --version'
@@ -16,8 +15,6 @@ currentBuild.displayName="Prod-API-AUtomation-#"+currentBuild.number
                     steps{
                         script{
                             try{
-
-                            	echo 'Ejecucion de pruebas'
                             	bat 'newman run "Newman.postman_collection.json" \
                               		--environment "Test 001.postman_environment.json" \
                               		--disable-unicode \
@@ -25,8 +22,7 @@ currentBuild.displayName="Prod-API-AUtomation-#"+currentBuild.number
                               		--reporter-junit-export "newman/index.xml" \
                               		--reporter-htmlextra-export "newman/index.html"' 
 
-
-                                currentBuild.result="SUCCESS"
+                                 currentBuild.result="SUCCESS"
 
                             }catch(Exception ex){
                                 currentBuild.result="FAILURE"
@@ -46,5 +42,24 @@ currentBuild.displayName="Prod-API-AUtomation-#"+currentBuild.number
                          ])   
                     }
                 }
-            }
+                
+              post {
+                    
+                failure {
+                         echo 'I failed :('
+                         echo "Send notifications for result: ${currentBuild.result}"                 
+                         mail to: "${correo}",
+                         subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+                         body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}"
+               }
+                 
+               success {
+                         echo 'I succeeded!'
+                         echo "Send notifications for result: ${currentBuild.result}"                  
+                         mail to: "${correo}",
+                         subject: "Success Pipeline: ${currentBuild.fullDisplayName}",
+                         body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}"
+               }
+            }                                 
+         }
    }
