@@ -37,7 +37,7 @@ def correo = 'jluceroav@gmail.com'
                    steps{
                     script {
                      try {
-                    	bat ("echo ${WORKSPACE}")  
+                    	echo "${WORKSPACE}"
                         publishHTML([
                               allowMissing: true,
                               alwaysLinkToLastBuild: true, 
