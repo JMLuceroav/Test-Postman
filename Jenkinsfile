@@ -22,8 +22,8 @@ currentBuild.displayName="Prod-API-AUtomation-#"+currentBuild.number
                               		--environment "Test 001.postman_environment.json" \
                               		--disable-unicode \
                               		--reporters cli,junit,htmlextra \
-                              		--reporter-junit-export "$WORKSPACE/newman/index.xml" \
-                              		--reporter-htmlextra-export "$WORKSPACE/newman/index.html"' 
+                              		--reporter-junit-export "newman/index.xml" \
+                              		--reporter-htmlextra-export "newman/index.html"' 
 
 
                                 currentBuild.result="SUCCESS"
