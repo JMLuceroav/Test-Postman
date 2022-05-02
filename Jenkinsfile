@@ -25,16 +25,19 @@ def correo = 'jluceroav@gmail.com'
                               		--reporter-junit-export "newman/index.xml" \
                               		--reporter-htmlextra-export "newman/index.html"' 
 
-                                 currentBuild.result="SUCCESS"
+                                 echo 'Ejecucion de pruebas sin errores...'
 
                             }catch(Exception ex){
-                                currentBuild.result="FAILURE"
+                                echo 'Finalizo ejecucion con fallos...'
                             }
                         }
                     }
                 }
                 stage("Generating Report"){
-                    steps{   
+                   steps{
+                    script {
+                     try {
+                    	bat ("echo ${WORKSPACE}")  
                         publishHTML([
                               allowMissing: true,
                               alwaysLinkToLastBuild: true, 
@@ -44,6 +47,14 @@ def correo = 'jluceroav@gmail.com'
                               reportTitles: 'Reporte de Pruebas'
                          ])
                         junit allowEmptyResults: true, testResults: "${WORKSPACE}/newman/index.xml"
+                        echo 'Reporte realizado con exito'
+                       }  
+                      catch (ex) {
+                        echo 'Reporte realizado con Fallos'
+                        error ('Failed')
+                    }
+                }   
+                         
                     }
                     
                post {
