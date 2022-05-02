@@ -43,7 +43,7 @@ def correo = 'jluceroav@gmail.com'
                               reportName: 'Evidencias de Prueba',
                               reportTitles: 'Reporte de Pruebas'
                          ])
-                        junit allowEmptyResults: true, skipPublishingChecks: true, testResults: "${WORKSPACE}/newman/index.xml"
+                        junit allowEmptyResults: true, testResults: "${WORKSPACE}/newman/index.xml"
                     }
                     
                post {
