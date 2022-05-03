@@ -37,16 +37,16 @@ def correo = 'jluceroav@gmail.com'
                    steps{
                     script {
                      try {
-                    	echo "${WORKSPACE}"
+                    	echo "${WORKSPACE}/newman/index.xml"
                         publishHTML([
                               allowMissing: true,
                               alwaysLinkToLastBuild: true, 
-                              keepAll: true, reportDir: "${WORKSPACE}\newman",
+                              keepAll: true, reportDir: "${WORKSPACE}/newman",
                               reportFiles: 'index.html',
                               reportName: 'Evidencias de Prueba',
                               reportTitles: 'Reporte de Pruebas'
                          ])
-                        junit allowEmptyResults: true, testResults: "${WORKSPACE}\newman\index.xml"
+                        junit allowEmptyResults: true, testResults: "${WORKSPACE}/newman/index.xml"
                         echo 'Reporte realizado con exito'
                        }  
                       catch (ex) {
