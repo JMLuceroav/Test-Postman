@@ -1,6 +1,6 @@
 currentBuild.displayName="API-Automation-#"+currentBuild.number
 
-def correo = 'jluceroav@gmail.com'
+def correo = 'jesus.lucero@rimac.com.pe'
 
     pipeline{
               agent any
