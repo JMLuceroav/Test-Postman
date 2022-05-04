@@ -3,7 +3,9 @@ currentBuild.displayName="API-Automation-#"+currentBuild.number
 def correo = 'jesus.lucero@rimac.com.pe'
 
     pipeline{
-              agent any
+            agent any
+        
+            tools {nodejs "node"}
             
             stages{
                 stage('Build'){
