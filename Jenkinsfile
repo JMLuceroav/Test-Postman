@@ -5,7 +5,7 @@ def correo = 'jesus.lucero@rimac.com.pe'
     pipeline{
             agent any
         
-            tools {nodejs "node"}
+            tools {NodeJS "node"}
             
             stages{
                 stage('Build'){
