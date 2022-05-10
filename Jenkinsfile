@@ -22,7 +22,7 @@ def dinamico = "correocorreocorreo"
                     steps{
                         script{
                             try{
-                                echo '"${ESCENARIO}"'
+                                echo 'Hola '+"${ESCENARIO}"+' val'
                             	bat 'newman run "Newman.postman_collection.json" \
                                     --folder "valo" \
                               		--environment "Test 001.postman_environment.json" \
