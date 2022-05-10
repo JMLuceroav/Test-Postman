@@ -31,9 +31,8 @@ def valor = "${ESCENARIO}"
                                             --reporter-junit-export "newman/index.xml" \
                                             --reporter-htmlextra-export "newman/index.html"' 
 
-                                            echo 'Ejecucion de pruebas sin errores...'
-                                    
-                                else{
+                                            echo 'Ejecucion de pruebas sin errores...'  
+                                }else{
                                      bat 'newman run "Newman.postman_collection.json" \
                                             --folder '+"${ESCENARIO}"+' \
                                             --environment "Test 001.postman_environment.json" \
