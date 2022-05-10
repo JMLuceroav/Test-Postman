@@ -2,6 +2,7 @@ currentBuild.displayName="API-Automation-#"+currentBuild.number
 
 def correo = 'jesus.lucero@rimac.com.pe'
 def valor = "${ESCENARIO}"
+def dinamico = "correocorreocorreo"
 
     pipeline{
             agent any
@@ -23,7 +24,7 @@ def valor = "${ESCENARIO}"
                             try{
                                 echo "${ESCENARIO}"
                             	bat 'newman run "Newman.postman_collection.json" \
-                                --folder $valor \
+                                --folder ${dinamico} \
                               		--environment "Test 001.postman_environment.json" \
                               		--disable-unicode \
                               		--reporters cli,junit,htmlextra \
