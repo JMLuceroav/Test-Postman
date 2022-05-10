@@ -20,14 +20,15 @@ def correo = 'jesus.lucero@rimac.com.pe'
                     steps{
                         script{
                             try{
+                                echo "\'${ESCENARIO}\'"
                                 echo "${ESCENARIO}"
-                            	bat newman run "Newman.postman_collection.json" \
+                            	bat 'newman run "Newman.postman_collection.json" \
                                     --folder "${ESCENARIO}" \
                               		--environment "Test 001.postman_environment.json" \
                               		--disable-unicode \
                               		--reporters cli,junit,htmlextra \
                               		--reporter-junit-export "newman/index.xml" \
-                              		--reporter-htmlextra-export "newman/index.html" 
+                              		--reporter-htmlextra-export "newman/index.html"' 
 
                                  echo 'Ejecucion de pruebas sin errores...'
 
