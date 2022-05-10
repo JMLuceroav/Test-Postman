@@ -21,9 +21,9 @@ def valor = "${ESCENARIO}"
                     steps{
                         script{
                             try{
-                                
+                                 echo 'Hola '+"${ESCENARIO}"+' val'
                                 if(valor == 'Regresion'){
-                                    echo 'Hola '+"${ESCENARIO}"+' val'
+                              
                                     bat 'newman run "Newman.postman_collection.json" \
                                             --environment "Test 001.postman_environment.json" \
                                             --disable-unicode \
