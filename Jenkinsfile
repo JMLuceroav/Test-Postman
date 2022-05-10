@@ -22,7 +22,7 @@ def correo = 'jesus.lucero@rimac.com.pe'
                             try{
                                 echo "${ESCENARIO}"
                             	bat 'newman run "Newman.postman_collection.json" \
-                                    --folder "${ESCENARIO}" \
+                                    --folder ${ESCENARIO} \
                               		--environment "Test 001.postman_environment.json" \
                               		--disable-unicode \
                               		--reporters cli,junit,htmlextra \
