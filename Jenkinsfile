@@ -22,7 +22,7 @@ def dinamico = "correocorreocorreo"
                     steps{
                         script{
                             try{
-                                echo "mvn test -Dcucumber.options=\"src/test/resources/features/ --tags ${ESCENARIO} --glue rimac\""
+                                echo '"${ESCENARIO}"'
                             	bat 'newman run "Newman.postman_collection.json" \
                                     --folder "valo" \
                               		--environment "Test 001.postman_environment.json" \
