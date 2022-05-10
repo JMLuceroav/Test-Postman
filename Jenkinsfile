@@ -24,7 +24,7 @@ def dinamico = "correocorreocorreo"
                             try{
                                 echo "mvn test -Dcucumber.options=\"src/test/resources/features/ --tags \'${ESCENARIO}\' --glue rimac\""
                             	bat 'newman run "Newman.postman_collection.json" \
-                                --folder "${dinamico}'" \
+                                    --folder "valo" \
                               		--environment "Test 001.postman_environment.json" \
                               		--disable-unicode \
                               		--reporters cli,junit,htmlextra \
