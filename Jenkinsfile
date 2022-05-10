@@ -2,7 +2,6 @@ currentBuild.displayName="API-Automation-#"+currentBuild.number
 
 def correo = 'jesus.lucero@rimac.com.pe'
 def valor = "${ESCENARIO}"
-def dinamico = "correocorreocorreo"
 
     pipeline{
             agent any
@@ -22,17 +21,30 @@ def dinamico = "correocorreocorreo"
                     steps{
                         script{
                             try{
-                                echo 'Hola '+"${ESCENARIO}"+' val'
-                            	bat 'newman run "Newman.postman_collection.json" \
-                                    --folder '+"${ESCENARIO}"+' \
-                              		--environment "Test 001.postman_environment.json" \
-                              		--disable-unicode \
-                              		--reporters cli,junit,htmlextra \
-                              		--reporter-junit-export "newman/index.xml" \
-                              		--reporter-htmlextra-export "newman/index.html"' 
+                                
+                                if(valor == 'Regresion'){
+                                    echo 'Hola '+"${ESCENARIO}"+' val'
+                                    bat 'newman run "Newman.postman_collection.json" \
+                                            --environment "Test 001.postman_environment.json" \
+                                            --disable-unicode \
+                                            --reporters cli,junit,htmlextra \
+                                            --reporter-junit-export "newman/index.xml" \
+                                            --reporter-htmlextra-export "newman/index.html"' 
 
-                                 echo 'Ejecucion de pruebas sin errores...'
+                                            echo 'Ejecucion de pruebas sin errores...'
+                                    
+                                else{
+                                     bat 'newman run "Newman.postman_collection.json" \
+                                            --folder '+"${ESCENARIO}"+' \
+                                            --environment "Test 001.postman_environment.json" \
+                                            --disable-unicode \
+                                            --reporters cli,junit,htmlextra \
+                                            --reporter-junit-export "newman/index.xml" \
+                                            --reporter-htmlextra-export "newman/index.html"' 
 
+                                            echo 'Ejecucion de pruebas sin errores...'
+                                 }
+                                
                             }catch(Exception ex){
                                 echo 'Finalizo ejecucion con fallos...'
                             }
